@@ -31,7 +31,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['http://127.0.0.1:8000/',
+ALLOWED_HOSTS = ['127.0.0.1',
                  'https://community-discussion-e4f1c07e8633.herokuapp.com/',
                  '.herokuapp.com']
 
