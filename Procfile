@@ -1,1 +1,1 @@
-gunicorn commuinity_discussion.wsgi
+gunicorn commuinity.wsgi
