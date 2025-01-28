@@ -1,1 +1,1 @@
-web: gunicorn commuinity.wsgi
+web: gunicorn community.wsgi
