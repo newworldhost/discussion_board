@@ -6,4 +6,5 @@ class HomePage(TemplateView):
     """
     Displays home page"
     """
-    template_name = 'index.html'
+    template_name = 'community_discussion/home.html'
+
