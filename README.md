@@ -1,5 +1,4 @@
 # venv_environment_setup
-markdown
 # Django-Powered Discussion Forum
 
 ## Overview
