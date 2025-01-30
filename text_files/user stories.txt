@@ -1,0 +1,74 @@
+Use Case 1: User Registration and Authentication
+Goal: Allow new users to register and existing users to log in to the forum.
+
+Actor: Visitor
+
+Preconditions: Visitor is on the registration or login page.
+
+Main Flow:
+
+Visitor enters their details (username, email, password) to register or email and password to log in.
+
+System validates the details and registers or logs in the user.
+
+User is redirected to the forum page.
+
+Use Case 2: Creating a New Discussion Post
+Goal: Enable users to start new discussions by creating posts.
+
+Actor: Logged-in user
+
+Preconditions: User is logged in and on the new post creation page.
+
+Main Flow:
+
+User enters the title and content of the discussion post.
+
+System saves the post to the database.
+
+User receives confirmation of the successful post creation, and the post is displayed in the forum.
+
+Use Case 3: Viewing Discussion Posts
+Goal: Allow users to view all discussion posts in the forum.
+
+Actor: User
+
+Preconditions: User is on the forum page.
+
+Main Flow:
+
+User navigates to the forum page.
+
+System fetches and displays a list of discussion posts.
+
+User can click on a post to view its details and comments.
+
+Use Case 4: Commenting on a Discussion Post
+Goal: Enable users to comment on existing discussion posts.
+
+Actor: Logged-in user
+
+Preconditions: User is logged in and viewing a discussion post.
+
+Main Flow:
+
+User enters a comment in the comment form.
+
+System saves the comment to the database.
+
+Comment is displayed under the associated post, and the user receives confirmation.
+
+Use Case 5: Editing User Profile
+Goal: Allow users to update their profile information.
+
+Actor: Logged-in user
+
+Preconditions: User is logged in and on the profile edit page.
+
+Main Flow:
+
+User updates their profile information (e.g., username, email, profile picture).
+
+System validates and saves the updated information.
+
+User receives confirmation of the successful profile update.

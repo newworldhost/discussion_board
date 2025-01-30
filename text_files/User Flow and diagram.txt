@@ -1,0 +1,119 @@
+User Flow Diagram Description
+Start
+
+User: Visitor
+
+Action: Visits the homepage
+
+Next Step: Registration/Login page
+
+Registration/Login Page
+
+User: Visitor
+
+Action: Chooses to register or log in
+
+Decision Point: Register or Log in
+
+Register
+
+User: Visitor
+
+Action: Completes registration form
+
+Next Step: Confirmation email sent
+
+Decision Point: Confirm email
+
+Log in
+
+User: Registered User
+
+Action: Completes login form
+
+Next Step: Forum Page
+
+Forum Page
+
+User: Logged-in User
+
+Actions:
+
+View discussion posts
+
+Create a new post
+
+Decision Point: View or Create post
+
+View Discussion Posts
+
+User: Logged-in User
+
+Action: Selects a discussion post to view details
+
+Next Step: Post Detail Page
+
+Create a New Post
+
+User: Logged-in User
+
+Action: Completes new post form
+
+Next Step: Post is created and displayed in the forum
+
+Post Detail Page
+
+User: Logged-in User
+
+Actions:
+
+Read post and comments
+
+Add a comment
+
+Decision Point: Read or Comment
+
+Add a Comment
+
+User: Logged-in User
+
+Action: Completes comment form
+
+Next Step: Comment is added and displayed under the post
+
+Edit User Profile
+
+User: Logged-in User
+
+Action: Navigates to profile edit page
+
+Next Step: Updates profile information
+
+Next Step: Profile information saved
+
+diagram of user flow 
+- Decision Point --> Register
+  |                                             |
+  |                                             V
+  |                                      Confirmation Email Sent -- Decision Point --> Confirm Email
+  |
+  V
+Log in -- Decision Point --> Forum Page -- Decision Point --> View Discussion Posts
+                                                    |                                |
+                                                    V                                V
+                                          Post Detail Page                       Create New Post
+                                                    |                                |
+                                                    V                                |
+                                                Read Post                        Post is Created
+                                                    |
+                                                    V
+                                               Add Comment
+                                                    |
+                                                    V
+                                         Comment is Added
+                                                    |
+                                                    V
+                                          Edit User Profile
+                                                    |
+                                                    V
+                                         Profile Information Saved

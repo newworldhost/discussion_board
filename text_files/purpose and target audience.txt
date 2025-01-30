@@ -1,0 +1,6 @@
+
+Problem Statement: To create a discussion board where users can chat about cybersecurity
+
+Purpose: To provide a platform for people to discuss cybersecurity principles technologies and methodologies 
+
+Target Audience: Cyber security and security experts and students 

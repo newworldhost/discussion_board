@@ -1,0 +1,6 @@
+Prioritise:
+registration
+login crud function
+to be able to create a topic
+forum discussion 
+profile picture.
