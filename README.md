@@ -5,6 +5,21 @@ markdown
 ## Overview
 This project is a Django-powered discussion forum that allows users to create accounts, log in, create discussion posts, and comment on posts. The project is designed with beginners in mind, making it a great introduction to Django and Python.
 
+## planning stage
+[ERD](erd.txt)
+
+[MVP-Scope](MVP Scope.txt)
+
+[potential-features](potential features.txt)
+
+[priority-features](priority features.txt)
+
+[purpose-and-target-audience](purpose and target audience.txt)
+
+[user-flow-and-diagram](User Flow and diagram.txt)
+
+[user-stories](user stories.txt)
+
 ## MVP Scope
 ### User Registration and Authentication
 - **User Registration**: Allow new users to create an account by providing a username, email, and password.
