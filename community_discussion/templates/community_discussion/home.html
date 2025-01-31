@@ -31,4 +31,13 @@
             <li class="list-group-item">No posts available.</li>
         {% endfor %}
     </ul>
+
+    <h2>Comments</h2>
+    <ul class="list-group mb-4">
+        {% for comment in comments %}
+            <li class="list-group-item">{{ comment.content }} by {{ comment.author.username }} on {{ comment.date_posted }} (Post: {{ comment.post.title }})</li>
+        {% empty %}
+            <li class="list-group-item">No comments available.</li>
+        {% endfor %}
+    </ul>
 {% endblock %}
