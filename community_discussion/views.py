@@ -1,6 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from .models import Category, SubCategory, Post
+from django.contrib.auth.forms import UserCreationForm
+from django.core.mail import send_mail
+from .forms import CommentForm, ProfileForm
+from django.contrib.auth.models import User
+
 
 class HomePage(TemplateView):
     """
@@ -34,3 +39,59 @@ class HomePage(TemplateView):
                 context['post'] = Post.objects.get(id=post_id)
                 context['comments'] = context['post'].comments.all()
                 return context
+
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            send_mail(
+                'Confirm your email',
+                'Please confirm your email by clicking the link.',
+                'from@example.com',
+                [user.email],
+                fail_silently=False,
+            )
+            return redirect('email_confirmation_sent')
+    else:
+        form = UserCreationForm()
+    return render(request, 'register.html', {'form': form})
+
+
+def confirm_email(request, token):
+    user = User.objects.get(email_confirmation_token=token)
+    user.is_active = True
+    user.save()
+    return redirect('login')
+def forum_page(request):
+    posts = Post.objects.all()
+    return render(request, 'community_discussion/forum_page.html', {'posts': posts})
+
+def post_detail(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    comments = post.comment_set.all()
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.author = request.user
+            comment.save()
+            return redirect('post_detail', post_id=post.id)
+    else:
+        form = CommentForm()
+    return render(request, 'community_discussion/post_detail.html', {'post': post, 'comments': comments, 'form': form})
+
+def edit_profile(request):
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, instance=request.user.profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = ProfileForm(instance=request.user.profile)
+    return render(request, 'community_discussion/edit_profile.html', {'form': form})
+
+def forum_page(request):
+    posts = Post.objects.all()
+    return render(request, 'community_discussion/forum_page.html', {'posts': posts})
