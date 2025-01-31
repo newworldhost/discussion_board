@@ -7,6 +7,7 @@ STATUS = (
     (0,"Draft"),
     (1,"Publish")
 )
+
 # Create your models here.
 
 class Category(models.Model):
@@ -34,3 +35,13 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+    
+class Comment(models.Model):
+        user = models.ForeignKey(User, on_delete=models.CASCADE)
+        content = models.TextField()
+        date_posted = models.DateTimeField(auto_now_add=True)
+        category = models.ForeignKey(Category, related_name='comments', on_delete=models.CASCADE, blank=True, null=True)
+        subcategory = models.ForeignKey(SubCategory, related_name='comments', on_delete=models.CASCADE, blank=True, null=True)
+
+        def __str__(self):
+            return f'Comment by {self.user.username} on {self.date_posted}'
