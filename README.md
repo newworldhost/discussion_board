@@ -7,17 +7,17 @@ This project is a Django-powered discussion forum that allows users to create ac
 ## planning stage
 [ERD](text_files\erd.txt)
 
-[MVP-Scope](text_files\MVP Scope.txt)
+[MVP-Scope](text_files\MVP_Scope.txt)
 
-[potential-features](text_files\potential features.txt)
+[potential-features](text_files\potential_features.txt)
 
-[priority-features](text_files\priority features.txt)
+[priority-features](text_files\priority_features.txt)
 
-[purpose-and-target-audience](text_files\purpose and target audience.txt)
+[purpose-and-target-audience](text_files\purpose_and_target_audience.txt)
 
-[user-flow-and-diagram](text_files\User Flow and diagram.txt)
+[user-flow-and-diagram](text_files\User_Flow_and_diagram.txt)
 
-[user-stories](text_files\user stories.txt)
+[user-stories](text_files\user_stories.txt)
 
 ## MVP Scope
 ### User Registration and Authentication
