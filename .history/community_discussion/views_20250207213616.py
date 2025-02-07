@@ -130,3 +130,15 @@ class Register(TemplateView):
             context = super().get_context_data(**kwargs)
             context['form'] = UserCreationForm()
             return context
+
+
+    class LoginView(TemplateView):
+        """
+        Displays the login page
+        """
+        template_name = 'community_discussion/login.html'
+
+        def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
+            context['form'] = AuthenticationForm()
+            return context

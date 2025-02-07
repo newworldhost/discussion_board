@@ -80,12 +80,9 @@ def confirm_email(request, token):
     user.is_active = True
     user.save()
     return redirect('login')
-
-
 def forum_page(request):
     posts = Post.objects.all()
     return render(request, 'community_discussion/forum_page.html', {'posts': posts})
-
 
 def post_detail(request, post_id):
     post = get_object_or_404(Post, id=post_id)
@@ -114,19 +111,6 @@ def edit_profile(request):
         form = ProfileForm(instance=request.user.profile)
     return render(request, 'community_discussion/edit_profile.html', {'form': form})
 
-
 def forum_page(request):
     posts = Post.objects.all()
     return render(request, 'community_discussion/forum_page.html', {'posts': posts})
-    
-    
-class Register(TemplateView):
-        """
-        Displays the registration page
-        """
-        template_name = 'community_discussion/register.html'
-
-        def get_context_data(self, **kwargs):
-            context = super().get_context_data(**kwargs)
-            context['form'] = UserCreationForm()
-            return context

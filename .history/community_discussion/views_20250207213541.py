@@ -118,9 +118,7 @@ def edit_profile(request):
 def forum_page(request):
     posts = Post.objects.all()
     return render(request, 'community_discussion/forum_page.html', {'posts': posts})
-    
-    
-class Register(TemplateView):
+    class RegisterView(TemplateView):
         """
         Displays the registration page
         """
@@ -129,4 +127,16 @@ class Register(TemplateView):
         def get_context_data(self, **kwargs):
             context = super().get_context_data(**kwargs)
             context['form'] = UserCreationForm()
+            return context
+
+
+    class LoginView(TemplateView):
+        """
+        Displays the login page
+        """
+        template_name = 'community_discussion/login.html'
+
+        def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
+            context['form'] = AuthenticationForm()
             return context

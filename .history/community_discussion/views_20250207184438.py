@@ -118,15 +118,3 @@ def edit_profile(request):
 def forum_page(request):
     posts = Post.objects.all()
     return render(request, 'community_discussion/forum_page.html', {'posts': posts})
-    
-    
-class Register(TemplateView):
-        """
-        Displays the registration page
-        """
-        template_name = 'community_discussion/register.html'
-
-        def get_context_data(self, **kwargs):
-            context = super().get_context_data(**kwargs)
-            context['form'] = UserCreationForm()
-            return context
