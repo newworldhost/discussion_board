@@ -42,8 +42,8 @@ class Comment(models.Model):
     content = models.TextField()
     date_posted = models.DateTimeField(auto_now_add=True)
     category = models.ForeignKey(Category, related_name='comments', on_delete=models.CASCADE, blank=True, null=True)
-    subcategory = models.ForeignKey(SubCategory, related_name='comments', on_delete=models.CASCADE, blank=True, null=True)
+        subcategory = models.ForeignKey(SubCategory, related_name='comments', on_delete=models.CASCADE, blank=True, null=True)
     
-    def __str__(self):
-        return f'Comment by {self.author.username} on {self.post.title}'
+        def __str__(self):
+            return f'Comment by {self.author.username} on {self.post.title}'
 
