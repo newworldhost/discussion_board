@@ -82,6 +82,8 @@ def post_detail(request, post_id):
         form = CommentForm()
     return render(request, 'community_discussion/post_detail.html', {'post': post, 'comments': comments, 'form': form})
 
+
+
 def edit_profile(request):
     if request.method == 'POST':
         form = ProfileForm(request.POST, instance=request.user.profile)

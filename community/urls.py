@@ -21,6 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('community_discussion.urls')),
     
+    
 ]
 
 
