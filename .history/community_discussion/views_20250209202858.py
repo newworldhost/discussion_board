@@ -103,7 +103,7 @@ def post_detail(request, post_id):
     return render(request, 'community_discussion/post_detail.html', {'post': post, 'comments': comments, 'form': form})
     
     
-def profile_view(request, username):
+def profileView(request, username):
     user = get_object_or_404(User, username=username)
     posts = Post.objects.filter(author=user)
     return render(request, 'community_discussion/profile.html', {'profile_user': user, 'posts': posts})

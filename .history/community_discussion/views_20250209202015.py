@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from .models import Category, SubCategory, Post
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -104,9 +104,9 @@ def post_detail(request, post_id):
     
     
 def profile_view(request, username):
-    user = get_object_or_404(User, username=username)
-    posts = Post.objects.filter(author=user)
-    return render(request, 'community_discussion/profile.html', {'profile_user': user, 'posts': posts})
+        user = get_object_or_404(User, username=username)
+        posts = Post.objects.filter(author=user)
+        return render(request, 'community_discussion/profile.html', {'profile_user': user, 'posts': posts})
 
 
 def edit_profile(request):

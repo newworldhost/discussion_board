@@ -57,9 +57,7 @@ def register(request):
             return redirect('email_confirmation_sent')
     else:
         form = UserCreationForm()
-    return render(request, 'register.html', {'form': form})
-
-
+    return render(request, 'register.html', {'form': form}
 def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
