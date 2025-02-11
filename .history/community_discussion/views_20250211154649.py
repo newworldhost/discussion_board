@@ -98,4 +98,15 @@ def logout_view(request):
     logout(request)
     return redirect('home')
 
-  
+    @login_required
+    def add_post(request):
+        if request.method == 'POST':
+            form = PostForm(request.POST)
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.author = request.user
+                post.save()
+                return redirect('post_detail', post_id=post.id)
+        else:
+            form = PostForm()
+        return render(request, 'community_discussion/add_post.html', {'form': form})
