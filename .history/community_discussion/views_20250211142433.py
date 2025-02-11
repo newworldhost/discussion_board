@@ -36,18 +36,18 @@ class HomePage(TemplateView):
             return context
         
         
-@login_required
-class Comment(TemplateView):
+        @login_required
+    class Comment(TemplateView):
    """
     Displays a specific comment
-   """
-template_name = 'community_discussion/comment_detail.html'
+    """
+    template_name = 'community_discussion/comment_detail.html'
 
-def get_context_data(self, **kwargs):
-    context = super().get_context_data(**kwargs)
-    comment_id = self.kwargs.get('comment_id')
-    context['comment'] = get_object_or_404(CommentModel, id=comment_id)
-    return context
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        comment_id = self.kwargs.get('comment_id')
+        context['comment'] = get_object_or_404(CommentModel, id=comment_id)
+        return context
 
 def register(request):
     if request.method == 'POST':
