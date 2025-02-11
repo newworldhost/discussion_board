@@ -18,7 +18,7 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-              <a class="nav-link active" aria-current="page" href="https://community-discussion-e4f1c07e8633.herokuapp.com/">Home</a>
+              <a class="nav-link active" aria-current="page" href="">Home</a>
               {% if user.is_authenticated %}
                 <a class="nav-link" href="{% url 'profile' user.username %}">Profile</a>
                 <a class="nav-link" href="{% url 'edit_profile' %}">Edit Profile</a>

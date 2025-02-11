@@ -6,4 +6,4 @@ class CommunityDiscussionConfig(AppConfig):
     name = 'community_discussion'
 
 def ready(self):
-    import community_discussion.signals
+        import community_discussion.signals

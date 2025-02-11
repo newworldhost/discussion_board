@@ -1,11 +1,19 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import TemplateView
-from .models import Category, SubCategory, Post, Profile, Comment as CommentModel
+from .models import Category, SubCategory, Post, Comment as CommentModel
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.core.mail import send_mail
 from .forms import CommentForm, ProfileForm
 from django.contrib.auth.models import User
-from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
+from django.urls import reverse
+from django.http import HttpResponseRedirect
+
+
+
+
 
 class HomePage(TemplateView):
     """
@@ -20,6 +28,15 @@ class HomePage(TemplateView):
         context['posts'] = Post.objects.all()
         return context
 
+        def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
+            category_id = self.kwargs.get('category_id')
+            context['category'] = Category.objects.get(id=category_id)
+            context['subcategories'] = SubCategory.objects.filter(category_id=category_id)
+            return context
+        
+        
+@login_required
 class Comment(TemplateView):
     """
     Displays a specific comment
@@ -29,7 +46,9 @@ class Comment(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         comment_id = self.kwargs.get('comment_id')
-        context['comment'] = get_object_or_404(CommentModel, id=comment_id)
+        comment = get_object_or_404(CommentModel, id=comment_id)
+        print(f"Fetched comment: {comment}")  # Debugging statement
+        context['comment'] = comment
         return context
 
 def register(request):
@@ -41,6 +60,7 @@ def register(request):
     else:
         form = UserCreationForm()
     return render(request, 'community_discussion/register.html', {'form': form})
+
 
 def login_view(request):
     if request.method == 'POST':
@@ -56,9 +76,11 @@ def login_view(request):
         form = AuthenticationForm()
     return render(request, 'community_discussion/login.html', {'form': form})
 
+
 def forum_page(request):
     posts = Post.objects.all()
     return render(request, 'community_discussion/forum_page.html', {'posts': posts})
+
 
 def post_detail(request, post_id):
     post = get_object_or_404(Post, id=post_id)
@@ -74,8 +96,8 @@ def post_detail(request, post_id):
     else:
         form = CommentForm()
     return render(request, 'community_discussion/post_detail.html', {'post': post, 'comments': comments, 'form': form})
-
-@login_required
+    
+@login_required    
 def profile_view(request, username):
     user = get_object_or_404(User, username=username)
     posts = Post.objects.filter(author=user)
@@ -92,6 +114,35 @@ def edit_profile(request):
     else:
         form = ProfileForm(instance=profile)
     return render(request, 'community_discussion/edit_profile.html', {'form': form})
+
+
+def forum_page(request):
+    posts = Post.objects.all()
+    return render(request, 'community_discussion/forum_page.html', {'posts': posts})
+    
+    
+class Register(TemplateView):
+        """
+        Displays the registration page
+        """
+        template_name = 'community_discussion/register.html'
+
+        def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
+            context['form'] = UserCreationForm()
+            return context
+        
+class Comment(TemplateView):
+        """
+        Displays a specific comment
+        """
+        template_name = 'community_discussion/comment_detail.html'
+
+        def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
+            comment_id = self.kwargs.get('comment_id')
+            context['comment'] = get_object_or_404(Comment, id=comment_id)
+
 
 @login_required
 def logout_view(request):
