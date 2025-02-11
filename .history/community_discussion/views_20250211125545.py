@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import TemplateView
-from .models import Category, SubCategory, Post, Comment
+from .models import Category, SubCategory, Post
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.core.mail import send_mail
 from .forms import CommentForm, ProfileForm
@@ -8,9 +8,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-from django.urls import reverse
-from django.http import HttpResponseRedirect
-from django.shortcuts import redirect
 
 
 
@@ -138,9 +135,9 @@ class Comment(TemplateView):
             context = super().get_context_data(**kwargs)
             comment_id = self.kwargs.get('comment_id')
             context['comment'] = get_object_or_404(Comment, id=comment_id)
-
-
+            return context
+        
 @login_required
 def logout_view(request):
     logout(request)
-    return redirect('home')
+    return http.HttpResponseRedirect(reverse('home'))

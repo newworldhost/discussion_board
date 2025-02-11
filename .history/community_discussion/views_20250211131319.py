@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import TemplateView
-from .models import Category, SubCategory, Post, Comment
+from .models import Category, SubCategory, Post
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.core.mail import send_mail
 from .forms import CommentForm, ProfileForm
@@ -10,7 +10,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.urls import reverse
 from django.http import HttpResponseRedirect
-from django.shortcuts import redirect
 
 
 
@@ -143,4 +142,4 @@ class Comment(TemplateView):
 @login_required
 def logout_view(request):
     logout(request)
-    return redirect('home')
+    return HttpResponseRedirect(reverse('home'))
