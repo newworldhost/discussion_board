@@ -57,7 +57,7 @@ def register(request):
         form = UserCreationForm()
     return render(request, 'community_discussion/register.html', {'form': form})
 
-
+@login_required
 def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
@@ -142,4 +142,4 @@ class Comment(TemplateView):
 @login_required
 def logout_view(request):
     logout(request)
-    return http.HttpResponseRedirect(reverse('home'))
+        return redirect('home')

@@ -7,7 +7,6 @@ from .forms import CommentForm, ProfileForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import logout
 
 
 
@@ -57,7 +56,7 @@ def register(request):
         form = UserCreationForm()
     return render(request, 'community_discussion/register.html', {'form': form})
 
-
+@login_required
 def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
@@ -71,6 +70,13 @@ def login_view(request):
     else:
         form = AuthenticationForm()
     return render(request, 'community_discussion/login.html', {'form': form})
+
+
+def confirm_email(request, token):
+    user = User.objects.get(email_confirmation_token=token)
+    user.is_active = True
+    user.save()
+    return redirect('login')
 
 
 def forum_page(request):
@@ -93,7 +99,7 @@ def post_detail(request, post_id):
         form = CommentForm()
     return render(request, 'community_discussion/post_detail.html', {'post': post, 'comments': comments, 'form': form})
     
-@login_required    
+    
 def profile_view(request, username):
     user = get_object_or_404(User, username=username)
     posts = Post.objects.filter(author=user)
@@ -126,20 +132,3 @@ class Register(TemplateView):
             context = super().get_context_data(**kwargs)
             context['form'] = UserCreationForm()
             return context
-        
-class Comment(TemplateView):
-        """
-        Displays a specific comment
-        """
-        template_name = 'community_discussion/comment_detail.html'
-
-        def get_context_data(self, **kwargs):
-            context = super().get_context_data(**kwargs)
-            comment_id = self.kwargs.get('comment_id')
-            context['comment'] = get_object_or_404(Comment, id=comment_id)
-            return context
-        
-@login_required
-def logout_view(request):
-    logout(request)
-    return http.HttpResponseRedirect(reverse('home'))

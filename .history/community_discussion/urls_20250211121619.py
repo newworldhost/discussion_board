@@ -8,6 +8,6 @@ urlpatterns = [
     path('profile/<str:username>/', views.profile_view, name='profile'),
     path('register/', views.register, name='register'),
     path('login/', views.login_view, name='login'),
-    path('logout/', views.logout, name='logout'),  # Add a logout view
+    path('logout/', views.logout_view, name='logout'),  # Add a logout view
     # Add other URL patterns here
 ]
