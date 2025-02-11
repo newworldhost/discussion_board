@@ -47,10 +47,13 @@ def register(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            return redirect('home')
+            user.is_active = False
+            fail_silently=False,
+            )
+            return redirect('email_confirmation_sent')
     else:
         form = UserCreationForm()
-    return render(request, 'community_discussion/register.html', {'form': form})
+    return render(request, 'register.html', {'form': form})
 
 
 def login_view(request):

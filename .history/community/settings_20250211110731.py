@@ -34,7 +34,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['127.0.0.1',
                  'https://community-discussion-e4f1c07e8633.herokuapp.com/',
                  '.herokuapp.com',
-                 'localhost',]
+                 ]
 
 
 # Application definition
