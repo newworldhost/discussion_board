@@ -1,4 +1,4 @@
-# venv_environment_setup
+# discussion_board
 # Django-Powered Discussion Forum
 
 ## Overview
