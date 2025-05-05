@@ -16,6 +16,26 @@ import dj_database_url
 
 if os.path.isfile("env.py"):
     import env
+import os
+import dj_database_url
+
+DATABASE_URL = os.environ.get("DATABASE_URL")
+
+if DATABASE_URL:
+    #explicitly decode bytes to string if necessary
+    if isinstance(DATABASE_URL, bytes):
+        DATABASE_URL = DATABASE_URL.decode('utf-8')
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+# This is the base directory of the project
+# The BASE_DIR variable is used to define the base directory of the project.
+# It is set to the directory where the settings.py file is located.
+# The os.path.join function is used to join the base directory with other directories or files.
+# The Path module from the pathlib library is used to create a path object
+# The Path module provides an object-oriented approach to working with file paths.
+# The Path object can be used to create, read, and write files,
+# as well as to navigate the file system.
+# The resolve() method returns the absolute path of the file,
+# and the parent property returns the parent directory of the file.
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -146,4 +166,3 @@ USE_TZ = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CSRF_TRUSTED_ORIGINS = ['https://*.codeinstitute-ide.net', 'https://*.herokuapp.com']
-

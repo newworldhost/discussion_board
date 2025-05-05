@@ -47,3 +47,13 @@ class Comment(models.Model):
     def __str__(self):
         return f'Comment by {self.author.username} on {self.post.title}'
 
+def save(self, *_args, **kwargs):
+#automatically set the category and subcategory based on the post
+    if self.post:
+        self.category = self.post.subcategory.category
+        self.subcategory = self.post.subcategory
+    super().save(*args, **kwargs)
+
+
+    def __str__(self):
+        return f'Comment by {self.author.username} on {self.post.title}'
