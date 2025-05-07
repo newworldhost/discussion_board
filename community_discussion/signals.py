@@ -1,2 +1,1 @@
- from .models import Profile
-ImportError: cannot import name 'Profile' from partially initialized module 'community_discussion.models' (most likely due to a circular import) (/home/john/codeinstitute/discussion_board/community_discussion/models.py)
+from .models import Profile
