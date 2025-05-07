@@ -1,29 +1,21 @@
-from django import forms
-from .models import Comment, Profile
+from django.db.models.signals import post_save
+from django.contrib.auth.models import User
+from django.dispatch import receiver
+from .models import Profile
 
-class CommentForm(forms.ModelForm):
-    class Meta:
-        model = Comment
-        fields = ['content']
 
-class ProfileForm(forms.ModelForm):
-    class Meta:
-        model = Profile
-        fields = ['user', 'bio', 'location', 'birth_date']
-        
-        
-class RegisterForm(forms.Form):
-        username = forms.CharField(max_length=150)
-        email = forms.EmailField()
-        password = forms.CharField(widget=forms.PasswordInput)
-        confirm_password = forms.CharField(widget=forms.PasswordInput)
+@receiver(post_save, sender=User)
+def create_profile(sender, instance, created, **kwargs):
+    """
+    Signal to create a Profile instance when a new User is created.
+    """
+    if created:
+        Profile.objects.create(user=instance)
 
-        def clean(self):
-            cleaned_data = super().clean()
-            password = cleaned_data.get("password")
-            confirm_password = cleaned_data.get("confirm_password")
 
-            if password != confirm_password:
-                raise forms.ValidationError("Passwords do not match")
-
-                return cleaned_data
+@receiver(post_save, sender=User)
+def save_profile(sender, instance, **kwargs):
+    """
+    Signal to save the Profile instance whenever the User is saved.
+    """
+    instance.profile.save()

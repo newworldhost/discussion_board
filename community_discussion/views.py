@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 
+
 class HomePage(TemplateView):
     """
     Displays home page
@@ -20,6 +21,7 @@ class HomePage(TemplateView):
         context['posts'] = Post.objects.all()
         return context
 
+
 class Comment(TemplateView):
     """
     Displays a specific comment
@@ -32,15 +34,17 @@ class Comment(TemplateView):
         context['comment'] = get_object_or_404(CommentModel, id=comment_id)
         return context
 
+
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save()
+            form.save()
             return redirect('home')
     else:
         form = UserCreationForm()
     return render(request, 'community_discussion/register.html', {'form': form})
+
 
 def login_view(request):
     if request.method == 'POST':
@@ -56,9 +60,11 @@ def login_view(request):
         form = AuthenticationForm()
     return render(request, 'community_discussion/login.html', {'form': form})
 
+
 def forum_page(request):
     posts = Post.objects.all()
     return render(request, 'community_discussion/forum_page.html', {'posts': posts})
+
 
 def post_detail(request, post_id):
     post = get_object_or_404(Post, id=post_id)
@@ -73,13 +79,23 @@ def post_detail(request, post_id):
             return redirect('post_detail', post_id=post.id)
     else:
         form = CommentForm()
-    return render(request, 'community_discussion/post_detail.html', {'post': post, 'comments': comments, 'form': form})
+    return render(
+        request,
+        'community_discussion/post_detail.html',
+        {'post': post, 'comments': comments, 'form': form}
+    )
+
 
 @login_required
 def profile_view(request, username):
     user = get_object_or_404(User, username=username)
     posts = Post.objects.filter(author=user)
-    return render(request, 'community_discussion/profile.html', {'profile_user': user, 'posts': posts})
+    return render(
+        request,
+        'community_discussion/profile.html',
+        {'profile_user': user, 'posts': posts}
+    )
+
 
 @login_required
 def edit_profile(request):
@@ -93,9 +109,8 @@ def edit_profile(request):
         form = ProfileForm(instance=profile)
     return render(request, 'community_discussion/edit_profile.html', {'form': form})
 
+
 @login_required
 def logout_view(request):
     logout(request)
     return redirect('home')
-
-  
