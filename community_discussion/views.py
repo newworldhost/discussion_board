@@ -100,6 +100,8 @@ def profile_view(request, username):
 @login_required
 def edit_profile(request):
     profile, created = Profile.objects.get_or_create(user=request.user)
+    if profile.user != request.user:
+        return redirect('home')  # Prevent editing other users' profiles warns user profile already exists
     if request.method == 'POST':
         form = ProfileForm(request.POST, instance=profile)
         if form.is_valid():
