@@ -6,7 +6,24 @@ from .forms import CommentForm, ProfileForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
+from .forms import PostForm
 
+@login_required
+def create_post(request):
+    """
+    view to handle creating a new post"""
+
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user #set the author to the current user
+            post.subcategory = form.cleaned_data['subcategory']     
+            post.save()
+            return redirect('forum_page') # redirect to the forum page after creating a post
+    else:
+        form = PostForm()
+    return render(request, 'community_discussion/create_post.html', {'form': form})
 
 class HomePage(TemplateView):
     """
@@ -62,13 +79,14 @@ def login_view(request):
 
 
 def forum_page(request):
+    """view to display the forum page with all posts"""
     posts = Post.objects.all()
     return render(request, 'community_discussion/forum_page.html', {'posts': posts})
 
 
 def post_detail(request, post_id):
     post = get_object_or_404(Post, id=post_id)
-    comments = post.comment_set.all()
+    comments = post.comments.all()
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
