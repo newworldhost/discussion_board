@@ -7,6 +7,12 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from .forms import PostForm
+@login_required 
+def all_posts(request): 
+    """
+    view to display all posts in the forum"""
+    posts = Post.objects.all() # retrieve all posts 
+    return render(request, 'community_discussion/all_posts.html', {'posts': posts})
 
 @login_required
 def create_post(request):

@@ -12,5 +12,6 @@ urlpatterns = [
     path('forum/', views.forum_page, name='forum_page'),
     path('post/<int:post_id>/', views.post_detail, name='post_detail'),
     path('delete_profile/<str:username>/', views.delete_profile, name='delete_profile'),
+    path('all_posts/', views.all_posts, name='all_posts'),
     # Add other URL patterns here
 ]
