@@ -11,5 +11,6 @@
     <p><strong>Location:</strong> {{ profile_user.profile.location }}</p>
     <p><strong>Birth Date:</strong> {{ profile_user.profile.birth_date }}</p>
     <a href="{% url 'edit_profile' %}" class="btn btn-primary">Edit Profile</a>
+    <a href="{% url 'delete_profile' profile_user.username %}" class="btn btn-danger">Delete Profile</a>
 {% endblock %}
 </div>

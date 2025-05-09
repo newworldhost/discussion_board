@@ -113,9 +113,18 @@ def profile_view(request, username):
         'community_discussion/profile.html',
         {'profile_user': user, 'posts': posts}
     )
-
-
-    comments = post.comments.all()
+@login_required 
+def delete_profile(request, username):
+    """
+    View to delete a user's profile."""
+    if request.method == 'POST':
+        user = request.user
+        #delete the user and their profile
+        user.delete()
+        #log out the user after deletion
+        logout(request)
+        return redirect('home')
+    return render(request, 'community_discussion/delete_profile.html', {'username': username})
 @login_required
 def edit_profile(request):
     """
@@ -131,7 +140,10 @@ def edit_profile(request):
         form = ProfileForm(instance=profile)
     return render(request, 'community_discussion/edit_profile.html', {'form': form})
 
-@login_required
+
 def logout_view(request):
+    """
+    View to handle user logout.
+    """
     logout(request)
     return redirect('home')
