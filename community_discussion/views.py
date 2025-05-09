@@ -115,11 +115,13 @@ def profile_view(request, username):
     )
 
 
+    comments = post.comments.all()
 @login_required
 def edit_profile(request):
+    """
+    View to edit the user's profile.
+    """
     profile, created = Profile.objects.get_or_create(user=request.user)
-    if profile.user != request.user:
-        return redirect('home')  # Prevent editing other users' profiles warns user profile already exists
     if request.method == 'POST':
         form = ProfileForm(request.POST, instance=profile)
         if form.is_valid():
@@ -128,7 +130,6 @@ def edit_profile(request):
     else:
         form = ProfileForm(instance=profile)
     return render(request, 'community_discussion/edit_profile.html', {'form': form})
-
 
 @login_required
 def logout_view(request):

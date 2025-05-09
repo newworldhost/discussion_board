@@ -9,7 +9,10 @@ class CommentForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['user', 'bio', 'location', 'birth_date']
+        fields = ['bio', 'location', 'birth_date']
+        widgets = {
+            'birth_date': forms.DateInput(attrs={'type': 'date'}), #add a date picker
+        }
         
 class PostForm(forms.ModelForm):
     class Meta:
