@@ -104,14 +104,8 @@ TEMPLATES = [
 WSGI_APPLICATION = 'community.wsgi.application'
 # staic files (CSS, Javascript, Images)
 STATIC_URL = 'static/'
-# additional directories for statics files
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
-# statics files collected
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-# use whitenoise to serve static files
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
